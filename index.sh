@@ -88,6 +88,69 @@ uci set firewall.@redirect[-1].src_dport='18000'
 uci set firewall.@redirect[-1].target='DNAT'
 uci set firewall.@redirect[-1].dest_ip='192.168.1.2'
 uci set firewall.@redirect[-1].dest='lan'
+### MAIL邮箱服务
+uci add firewall redirect
+uci set firewall.@redirect[-1].dest_port='25'
+uci set firewall.@redirect[-1].src='wan'
+uci set firewall.@redirect[-1].name='SMTP'
+uci set firewall.@redirect[-1].src_dport='25'
+uci set firewall.@redirect[-1].target='DNAT'
+uci set firewall.@redirect[-1].dest_ip='192.168.1.2'
+uci set firewall.@redirect[-1].dest='lan'
+uci add_list firewall.@redirect[-1].proto='tcp'
+uci add firewall redirect
+uci set firewall.@redirect[-1].dest_port='143'
+uci set firewall.@redirect[-1].src='wan'
+uci set firewall.@redirect[-1].name='IMAP'
+uci set firewall.@redirect[-1].src_dport='143'
+uci set firewall.@redirect[-1].target='DNAT'
+uci set firewall.@redirect[-1].dest_ip='192.168.1.2'
+uci set firewall.@redirect[-1].dest='lan'
+uci add firewall redirect
+uci set firewall.@redirect[-1].dest_port='110'
+uci set firewall.@redirect[-1].src='wan'
+uci set firewall.@redirect[-1].name='POP3'
+uci set firewall.@redirect[-1].src_dport='110'
+uci set firewall.@redirect[-1].target='DNAT'
+uci set firewall.@redirect[-1].dest_ip='192.168.1.2'
+uci set firewall.@redirect[-1].dest='lan'
+uci add_list firewall.@redirect[-1].proto='tcp'
+uci add firewall redirect
+uci set firewall.@redirect[-1].dest_port='465'
+uci set firewall.@redirect[-1].src='wan'
+uci set firewall.@redirect[-1].name='SMTP-SS'
+uci set firewall.@redirect[-1].src_dport='465'
+uci set firewall.@redirect[-1].target='DNAT'
+uci set firewall.@redirect[-1].dest_ip='192.168.1.2'
+uci set firewall.@redirect[-1].dest='lan'
+uci add_list firewall.@redirect[-1].proto='tcp'
+uci add firewall redirect
+uci set firewall.@redirect[-1].dest_port='587'
+uci set firewall.@redirect[-1].src='wan'
+uci set firewall.@redirect[-1].name='SMTP-TLS'
+uci set firewall.@redirect[-1].src_dport='587'
+uci set firewall.@redirect[-1].target='DNAT'
+uci set firewall.@redirect[-1].dest_ip='192.168.1.2'
+uci set firewall.@redirect[-1].dest='lan'
+uci add_list firewall.@redirect[-1].proto='tcp'
+uci add firewall redirect
+uci set firewall.@redirect[-1].dest_port='993'
+uci set firewall.@redirect[-1].src='wan'
+uci set firewall.@redirect[-1].name='IMAP-SSL/TLS'
+uci set firewall.@redirect[-1].src_dport='993'
+uci set firewall.@redirect[-1].target='DNAT'
+uci set firewall.@redirect[-1].dest_ip='192.168.1.2'
+uci set firewall.@redirect[-1].dest='lan'
+uci add_list firewall.@redirect[-1].proto='tcp'
+uci add firewall redirect
+uci set firewall.@redirect[-1].dest_port='995'
+uci set firewall.@redirect[-1].src='wan'
+uci set firewall.@redirect[-1].name='POP3-SSL/TLS'
+uci set firewall.@redirect[-1].src_dport='995'
+uci set firewall.@redirect[-1].target='DNAT'
+uci set firewall.@redirect[-1].dest_ip='192.168.1.2'
+uci set firewall.@redirect[-1].dest='lan'
+uci add_list firewall.@redirect[-1].proto='tcp'
 uci commit firewall
 
 
@@ -129,6 +192,7 @@ opkg update
 opkg install ckipver
 ## 防污染包
 opkg install cdns dns-forwarder pdnsd
+opkg install shadowsocksr-libev luci-app-shadowsocksr
 
 
 # 每天4点更新OPKG
