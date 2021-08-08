@@ -27,15 +27,15 @@ uci set luci_statistics.cfg288c80.url='google.com'
 # 无线网设置
 PASSWORD="changeme"
 ESSID="无线账户"
-uci set wireless.radio0.channel='auto'
+uci set wireless.radio0.country='US'
 uci set wireless.radio0.htmode='VHT160'
+uci set wireless.radio0.channel='auto'
 uci set wireless.default_radio0.key=$PASSWORD
 uci set wireless.default_radio0.ssid=$ESSID
 uci set wireless.default_radio0.encryption='psk2'
 uci set wireless.default_radio1.key=$PASSWORD
 uci set wireless.default_radio1.ssid=$ESSID
 uci set wireless.default_radio1.encryption='psk2'
-uci set wireless.radio2.channel='auto'
 uci set wireless.default_radio2.key=$PASSWORD
 uci set wireless.default_radio2.ssid=$ESSID
 uci set wireless.default_radio2.encryption='psk2'
@@ -205,5 +205,5 @@ echo "0 4 * * * /usr/share/crontabs/update.sh" > /etc/crontabs/root
 
 
 # 美化界面
-wget https://github.com/jerrykuku/luci-theme-argon/releases/download/v2.2.5/luci-theme-argon_2.2.5-20200914_all.ipk -O luci-theme-argon.ipk
+wget --no-check-certificate https://github.com/jerrykuku/luci-theme-argon/releases/download/v2.2.5/luci-theme-argon_2.2.5-20200914_all.ipk -O luci-theme-argon.ipk
 opkg install luci-theme-argon.ipk
