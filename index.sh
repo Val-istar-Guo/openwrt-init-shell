@@ -25,8 +25,8 @@ uci set luci_statistics.cfg288c80.name='Google'
 uci set luci_statistics.cfg288c80.url='google.com'
 
 # 无线网设置
-PASSWORD="changeme"
-ESSID="无线账户"
+WIRELESS_PASSWORD="changeme"
+WIRELESS_ESSID="无线账户"
 uci set wireless.radio0.country='US'
 uci set wireless.radio0.htmode='VHT160'
 uci set wireless.radio0.channel='auto'
@@ -39,10 +39,25 @@ uci set wireless.default_radio1.encryption='psk2'
 uci set wireless.default_radio2.key=$PASSWORD
 uci set wireless.default_radio2.ssid=$ESSID
 uci set wireless.default_radio2.encryption='psk2'
+uci commit
 
 
 # DDNS
-opkg install ddns-scripts luci-app-ddns luci-i18n-ddns-zh-cn
+opkg install ddns-scripts luci-app-ddns luci-i18n-ddns-zh-cn ddns-scripts_aliyun
+
+DDNS_USERNAME="username"
+DDNS_PASSWORD="password"
+DDNS_HOST=""
+DDNS_DOMAIN=""
+
+uci set ddns.ddns_ipv4=service
+uci set ddns.ddns_ipv4.service_name='aliyun.com'
+uci set ddns.ddns_ipv4.lookup_host=$DDNS_HOST
+uci set ddns.ddns_ipv4.domain=$DDNS_DOMAIN
+uci set ddns.ddns_ipv4.username=$DDNS_USERNAME
+uci set ddns.ddns_ipv4.password=$DDNS_PASSWORD
+uci set ddns.ddns_ipv4.enabled='1'
+uci commit
 
 
 # 支持HTTPS
@@ -156,7 +171,7 @@ uci commit firewall
 
 # 每天4点更新OPKG
 touch /etc/root/root
-echo "0 4 * * * opkg update" > /etc/crontabs/root
+echo "0 4 * * * opkg update" >> /etc/crontabs/root
 /etc/init.d/cron enable
 
 
@@ -200,7 +215,7 @@ mkdir /usr/share/crontabs
 wget https://raw.githubusercontent.com/Val-istar-Guo/openwrt-init-shell/master/update.sh -O /usr/share/crontabs/update.sh
 chmod +x /usr/share/crontabs/update.sh
 touch /etc/root/root
-echo "0 4 * * * /usr/share/crontabs/update.sh" > /etc/crontabs/root
+echo "0 4 * * * /usr/share/crontabs/update.sh" >> /etc/crontabs/root
 /etc/init.d/cron enable
 
 
